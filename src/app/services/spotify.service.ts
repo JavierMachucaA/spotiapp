@@ -11,8 +11,8 @@ import { map } from 'rxjs/operators';
 })
 export class SpotifyService {
   private log = new LogUtil(SpotifyService);
-  
-  private _token = "BQA2oSJhh_H-9DJmI40vNAF6MdWkH0BQ2NAJTHBJO05TOPmR5k7f8TEq6GAYpno0lsRtD_YmO0BT7S_E9z0";
+  private ARTIST_ROUTE : string = 'artists';
+  private _token = "BQCDC4ZAQA6SMdLH5JDDUQ6TGxfsfjk0tcSURDsgeR5SkAWfigIlDx3x1TngNM460L2xNbZemihu_ZhBioQ";
 
   constructor( private http : HttpClient) { 
     this.log.print("Servicio Spotify Listo");
@@ -33,7 +33,16 @@ export class SpotifyService {
     return this.getQuery("browse/new-releases").pipe( map( (data : any) => data.albums.items ));
   }
 
-  public getArtista(termino: string ){
+  public getArtistas(termino: string ){
     return this.getQuery(`search?q=${termino}&type=artist`).pipe( map((data : any)=> data.artists.items));
+  }
+
+  public getArtist(id: string ){
+    return this.getQuery(`${this.ARTIST_ROUTE}/${ id }`);
+  }
+
+  public getTopTracksArtist(id: string ){
+    return this.getQuery(`${this.ARTIST_ROUTE}/${ id }/top-tracks?country=cl`).
+    pipe( map( (data : any) =>data['tracks'] ));
   }
 }

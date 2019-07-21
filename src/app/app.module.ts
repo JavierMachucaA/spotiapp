@@ -14,6 +14,9 @@ import { ROUTES } from './app.routes';
 //PIPES
 import { NoimagePipe } from './pipes/noimage.pipe';
 import { TarjetasComponent } from './components/tarjetas/tarjetas.component';
+import { LoadingComponent } from './components/shared/loading/loading.component';
+import { DomseguroPipe } from './pipes/domseguro.pipe';
+import { SpotifysegurizedPipe } from './pipes/spotifysegurized.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,11 @@ import { TarjetasComponent } from './components/tarjetas/tarjetas.component';
     ArtistaComponent,
     NavbarComponent,
     NoimagePipe,
+    DomseguroPipe,
+    SpotifysegurizedPipe,
     TarjetasComponent,
+    LoadingComponent,
+    SpotifysegurizedPipe,
   ],
   imports: [
     HttpClientModule,

@@ -11,22 +11,25 @@ export class SearchComponent implements OnInit {
   private log = new LogUtil(SearchComponent);
 
   public _artistas : any [] = [];
-
-  constructor( private _spotifyService : SpotifyService) { }
+  public loading: boolean ;
+  constructor( private _spotifyService : SpotifyService) { 
+  }
 
   ngOnInit() {
   }
 
   public buscar(termino: string ){
-    this._spotifyService.getArtista(termino)
+    this.loading = true;
+    (termino!==null && termino!=='') ? this._spotifyService.getArtistas(termino)
     .subscribe(
       (data: any)=>{
-        this.log.print(data,"buscar");
+        //this.log.print(data,"buscar");
         this._artistas = data;
+        this.loading = false;
       }, 
       (error :any) =>{
         this.log.printError("error",error);
-      });
+      }):console.log("Busqueda vacía");
   }
 
 }
